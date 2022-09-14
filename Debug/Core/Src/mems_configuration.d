@@ -31,7 +31,7 @@ Core/Src/mems_configuration.o: ../Core/Src/mems_configuration.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h \
- ../MEMS/Target/iks02a1_conf.h ../Core/Inc/stm32f7xx_nucleo_bus.h \
+ ../X-CUBE-MEMS1/Target/iks02a1_conf.h ../Core/Inc/stm32f7xx_nucleo_bus.h \
  ../Core/Inc/stm32f7xx_nucleo_conf.h ../Core/Inc/stm32f7xx_nucleo_errno.h \
  ../Core/Inc/stm32f7xx_nucleo_errno.h \
  ../Drivers/BSP/Components/Common/motion_sensor.h \
@@ -109,7 +109,7 @@ Core/Src/mems_configuration.o: ../Core/Src/mems_configuration.c \
 
 ../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h:
 
-../MEMS/Target/iks02a1_conf.h:
+../X-CUBE-MEMS1/Target/iks02a1_conf.h:
 
 ../Core/Inc/stm32f7xx_nucleo_bus.h:
 

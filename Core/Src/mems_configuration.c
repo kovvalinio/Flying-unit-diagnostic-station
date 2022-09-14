@@ -225,6 +225,12 @@ HAL_UART_Transmit_IT(&huart3, (uint8_t*)dataOut, databufforlentgh);
 
 }
 
+void Accelero_Get_Values(u_int32_t Instance, IKS02A1_MOTION_SENSOR_Axes_t *acceleration){
+
+	IKS02A1_MOTION_SENSOR_GetAxes(Instance, MOTION_ACCELERO, acceleration);
+
+}
+
 /**
   * @brief  Handles the gyroscope axes data getting/sending
   * @param  Instance the device instance

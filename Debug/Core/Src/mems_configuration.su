@@ -5,3 +5,4 @@ mems_configuration.c:133:6:BSP_PB_Callback	16	static
 mems_configuration.c:142:6:MX_IKS02A1_DataLogTerminal_Process	16	static
 mems_configuration.c:181:13:floatToInt	32	static
 mems_configuration.c:203:13:Accelero_Sensor_Handler	56	static
+mems_configuration.c:228:6:Accelero_Get_Values	16	static

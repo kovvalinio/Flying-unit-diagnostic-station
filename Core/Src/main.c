@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "mems_configuration.h"
+#include "iks02a1_motion_sensors.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,14 +90,27 @@ int main(void)
   MX_TIM3_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+
   MX_MEMS_Init();
+  IKS02A1_MOTION_SENSOR_Axes_t acceleration;
+  char dataOut[300];
+  uint16_t databufforlentgh;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  MX_MEMS_Process();
+	  Accelero_Get_Values(0, &acceleration);
+
+	  databufforlentgh = sprintf(dataOut, "ACC_X[%d]: %d, ACC_Y[%d]: %d, ACC_Z[%d]: %d\r", 0,
+	               	   	   	   	   	acceleration.x, 0, acceleration.y, 0, acceleration.z);
+
+	  HAL_UART_Transmit_IT(&huart3, (uint8_t*)dataOut, databufforlentgh);
+
+	  HAL_Delay(2000);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -1,7 +1,7 @@
 Drivers/BSP/IKS02A1/iks02a1_motion_sensors.o: \
  ../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.c \
  ../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h \
- ../MEMS/Target/iks02a1_conf.h \
+ ../X-CUBE-MEMS1/Target/iks02a1_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Core/Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -45,7 +45,7 @@ Drivers/BSP/IKS02A1/iks02a1_motion_sensors.o: \
 
 ../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h:
 
-../MEMS/Target/iks02a1_conf.h:
+../X-CUBE-MEMS1/Target/iks02a1_conf.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 

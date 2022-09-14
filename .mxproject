@@ -3,14 +3,14 @@ LibFiles=Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal_i2c.h;Drivers\STM32F7xx_
 
 [PreviousUsedCubeIDEFiles]
 SourceFiles=Core\Src\main.c;Core\Src\gpio.c;Core\Src\tim.c;Core\Src\usart.c;Core\Src\stm32f7xx_nucleo_bus.c;Core\Src\stm32f7xx_it.c;Core\Src\stm32f7xx_hal_msp.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_i2c.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_i2c_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_flash.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_flash_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_gpio.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_cortex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_exti.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_tim.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_tim_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_uart.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_uart_ex.c;Drivers\CMSIS\Device\ST\STM32F7xx\Source\Templates\system_stm32f7xx.c;Core\Src\system_stm32f7xx.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_i2c.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_i2c_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rcc_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_flash.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_flash_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_gpio.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_dma_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_pwr_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_cortex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_exti.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_tim.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_tim_ex.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_uart.c;Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_uart_ex.c;Drivers\CMSIS\Device\ST\STM32F7xx\Source\Templates\system_stm32f7xx.c;Core\Src\system_stm32f7xx.c;;;
-HeaderPath=Drivers\STM32F7xx_HAL_Driver\Inc;Drivers\STM32F7xx_HAL_Driver\Inc\Legacy;Drivers\CMSIS\Device\ST\STM32F7xx\Include;Drivers\CMSIS\Include;Drivers\BSP\Components\iis2dlpc;Drivers\BSP\Components\iis2mdc;Drivers\BSP\Components\ism330dhcx;Drivers\BSP\IKS02A1;Drivers\BSP\Components\Common;Middlewares\ST\STM32_MotionAC_Library\Inc;Core\Inc;MEMS\Target;
+HeaderPath=Drivers\STM32F7xx_HAL_Driver\Inc;Drivers\STM32F7xx_HAL_Driver\Inc\Legacy;Drivers\CMSIS\Device\ST\STM32F7xx\Include;Drivers\CMSIS\Include;Drivers\BSP\Components\iis2dlpc;Drivers\BSP\Components\iis2mdc;Drivers\BSP\Components\ism330dhcx;Drivers\BSP\IKS02A1;Drivers\BSP\Components\Common;Middlewares\ST\STM32_MotionAC_Library\Inc;Core\Inc;X-CUBE-MEMS1\Target;
 CDefines=USE_HAL_DRIVER;STM32F767xx;USE_HAL_DRIVER;USE_HAL_DRIVER;
 
 [PreviousGenFiles]
 AdvancedFolderStructure=true
 HeaderFileListSize=11
 HeaderFiles#0=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/Core/Inc/gpio.h
-HeaderFiles#1=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/MEMS/Target/iks02a1_conf.h
+HeaderFiles#1=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/X-CUBE-MEMS1/Target/iks02a1_conf.h
 HeaderFiles#2=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/Core/Inc/tim.h
 HeaderFiles#3=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/Core/Inc/usart.h
 HeaderFiles#4=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/Core/Inc/stm32f7xx_nucleo_bus.h
@@ -22,7 +22,7 @@ HeaderFiles#9=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/
 HeaderFiles#10=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/Core/Inc/main.h
 HeaderFolderListSize=2
 HeaderPath#0=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/Core/Inc
-HeaderPath#1=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/MEMS/Target
+HeaderPath#1=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/X-CUBE-MEMS1/Target
 HeaderFiles=;
 SourceFileListSize=7
 SourceFiles#0=C:/Users/Michal/OneDrive/Documents/Flying unit diagnostic station/Core/Src/gpio.c
