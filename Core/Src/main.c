@@ -18,6 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "crc.h"
+#include "dma.h"
+#include "i2s.h"
+#include "pdm2pcm.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -26,6 +30,7 @@
 /* USER CODE BEGIN Includes */
 #include "mems_configuration.h"
 #include "iks02a1_motion_sensors.h"
+#include "pdm2pcm_glo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,6 +40,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define PDM_BUF 384
+#define PCM_MID_BUF 48
+#define PCM_BIG_BUF 4800
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,13 +53,57 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+		uint8_t RxFlag_B = 0;
 
+		uint8_t PDM_Rxbuf_B[PDM_BUF];
+		uint16_t pcmMidBuf_B[PCM_MID_BUF];
+		uint16_t pcm_big_buf_B[PCM_BIG_BUF];
+
+		uint32_t pdm2pcm_status_half;
+		uint32_t pdm2pcm_status_cplt;
+
+		uint32_t fifo_w_ptr_B = 0;
+
+		uint8_t espTxFlag=0;
+
+		uint16_t tim_ptr =0;
+
+		  uint16_t ok =0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void FifoWrite_B(uint16_t data) {
 
+
+	if(fifo_w_ptr_B !=PCM_BIG_BUF){
+		pcm_big_buf_B[fifo_w_ptr_B] = data;
+		fifo_w_ptr_B++;
+	}
+	if(fifo_w_ptr_B == PCM_BIG_BUF){
+		espTxFlag = 1;
+	}
+}
+
+void HAL_I2S_RxHalfCpltCallback (I2S_HandleTypeDef *hi1s) {
+	  if(hi1s->Instance ==SPI1){
+	  RxFlag_B = 1;
+	  }
+}
+
+void HAL_I2S_RxCpltCallback (I2S_HandleTypeDef *hi1s) {
+	  if(hi1s->Instance ==SPI1){
+	  RxFlag_B = 2;
+	  }
+}
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
+	if(huart->Instance == USART3){
+
+		fifo_w_ptr_B =0;
+	}
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -88,8 +140,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM3_Init();
+  MX_DMA_Init();
+  MX_I2S1_Init();
   MX_USART3_UART_Init();
+  MX_CRC_Init();
+  MX_PDM2PCM_Init();
   /* USER CODE BEGIN 2 */
+
+  HAL_I2S_Receive_DMA(&hi2s1, (uint16_t*)PDM_Rxbuf_B, PDM_BUF);
 
   MX_MEMS_Init();
   IKS02A1_MOTION_SENSOR_Axes_t acceleration;
@@ -102,14 +160,48 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  Accelero_Get_Values(0, &acceleration);
 
-	  databufforlentgh = sprintf(dataOut, "ACC_X[%d]: %d, ACC_Y[%d]: %d, ACC_Z[%d]: %d\r", 0,
-	               	   	   	   	   	acceleration.x, 0, acceleration.y, 0, acceleration.z);
 
-	  HAL_UART_Transmit_IT(&huart3, (uint8_t*)dataOut, databufforlentgh);
 
-	  HAL_Delay(2000);
+
+	  if(espTxFlag == 0 && fifo_w_ptr_B !=PCM_BIG_BUF){
+		  if (RxFlag_B == 1) {
+
+			  pdm2pcm_status_half = PDM_Filter(&PDM_Rxbuf_B[0], &pcmMidBuf_B[0], &PDM1_filter_handler);
+					 for (int i = 0; i < PCM_MID_BUF; i++) {
+						 FifoWrite_B(pcmMidBuf_B[i]);
+					 }
+
+			  RxFlag_B= 0;
+				//HAL_GPIO_WritePin(TX_OUTPUT_GPIO_Port, TX_OUTPUT_Pin, GPIO_PIN_RESET);
+			}
+		  if (RxFlag_B == 2) {
+			//HAL_GPIO_WritePin(TX_OUTPUT_GPIO_Port, TX_OUTPUT_Pin, GPIO_PIN_SET);
+			  pdm2pcm_status_cplt = PDM_Filter(&PDM_Rxbuf_B[192], &pcmMidBuf_B[0], &PDM1_filter_handler);
+				 for (int i = 0; i < PCM_MID_BUF; i++) {
+					 FifoWrite_B(pcmMidBuf_B[i]);
+				 }
+			  RxFlag_B = 0;
+			//HAL_GPIO_WritePin(TX_OUTPUT_GPIO_Port, TX_OUTPUT_Pin, GPIO_PIN_RESET);
+		}
+	  }
+	  if(espTxFlag == 1){
+		  for(int i = 0 ; i < PCM_BIG_BUF ; i++){
+
+
+
+		  	  	  	  Accelero_Get_Values(0, &acceleration);
+
+		  	  	  	  databufforlentgh = sprintf(dataOut, "%d;%d;%d;%d\r",
+		  	  	               	   	   	   	   	acceleration.x, acceleration.y, acceleration.z, pcm_big_buf_B[i]);
+		  			  HAL_UART_Transmit_IT(&huart3, (uint8_t*)dataOut, databufforlentgh);
+		  			  HAL_Delay(20);
+		  }
+			espTxFlag = 0;
+
+	  }
+
+//	  HAL_Delay(2000);
 
     /* USER CODE END WHILE */
 
