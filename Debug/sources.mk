@@ -27,4 +27,5 @@ Drivers/BSP/Components/iis2mdc \
 Drivers/BSP/Components/ism330dhcx \
 Drivers/BSP/IKS02A1 \
 Drivers/STM32F7xx_HAL_Driver/Src \
+PDM2PCM/App \
 
