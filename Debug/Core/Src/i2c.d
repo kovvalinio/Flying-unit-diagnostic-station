@@ -1,4 +1,4 @@
-Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
+Core/Src/i2c.o: ../Core/Src/i2c.c ../Core/Inc/i2c.h ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Core/Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -31,23 +31,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- ../Core/Inc/crc.h ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/i2c.h \
- ../Core/Inc/i2s.h ../PDM2PCM/App/pdm2pcm.h \
- ../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h \
- ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- ../Core/Inc/mems_configuration.h \
- ../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h \
- ../X-CUBE-MEMS1/Target/iks02a1_conf.h ../Core/Inc/stm32f7xx_nucleo_bus.h \
- ../Core/Inc/stm32f7xx_nucleo_conf.h ../Core/Inc/stm32f7xx_nucleo_errno.h \
- ../Core/Inc/stm32f7xx_nucleo_errno.h \
- ../Drivers/BSP/Components/Common/motion_sensor.h \
- ../Drivers/BSP/Components/ism330dhcx/ism330dhcx.h \
- ../Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.h \
- ../Drivers/BSP/Components/iis2dlpc/iis2dlpc.h \
- ../Drivers/BSP/Components/iis2dlpc/iis2dlpc_reg.h \
- ../Drivers/BSP/Components/iis2mdc/iis2mdc.h \
- ../Drivers/BSP/Components/iis2mdc/iis2mdc_reg.h ../Core/Inc/test_lib.h
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
+
+../Core/Inc/i2c.h:
 
 ../Core/Inc/main.h:
 
@@ -116,53 +102,3 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
-
-../Core/Inc/crc.h:
-
-../Core/Inc/main.h:
-
-../Core/Inc/dma.h:
-
-../Core/Inc/i2c.h:
-
-../Core/Inc/i2s.h:
-
-../PDM2PCM/App/pdm2pcm.h:
-
-../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h:
-
-../Core/Inc/tim.h:
-
-../Core/Inc/usart.h:
-
-../Core/Inc/gpio.h:
-
-../Core/Inc/mems_configuration.h:
-
-../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h:
-
-../X-CUBE-MEMS1/Target/iks02a1_conf.h:
-
-../Core/Inc/stm32f7xx_nucleo_bus.h:
-
-../Core/Inc/stm32f7xx_nucleo_conf.h:
-
-../Core/Inc/stm32f7xx_nucleo_errno.h:
-
-../Core/Inc/stm32f7xx_nucleo_errno.h:
-
-../Drivers/BSP/Components/Common/motion_sensor.h:
-
-../Drivers/BSP/Components/ism330dhcx/ism330dhcx.h:
-
-../Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.h:
-
-../Drivers/BSP/Components/iis2dlpc/iis2dlpc.h:
-
-../Drivers/BSP/Components/iis2dlpc/iis2dlpc_reg.h:
-
-../Drivers/BSP/Components/iis2mdc/iis2mdc.h:
-
-../Drivers/BSP/Components/iis2mdc/iis2mdc_reg.h:
-
-../Core/Inc/test_lib.h:
