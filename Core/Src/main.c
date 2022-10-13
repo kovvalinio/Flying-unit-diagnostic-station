@@ -42,8 +42,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define PDM_BUF 768
-#define PCM_MID_BUF 48
+#define PDM_BUF 256
+#define PCM_MID_BUF 16
 #define PCM_BIG_BUF 2*48000
 /* USER CODE END PD */
 
@@ -181,7 +181,7 @@ int main(void)
 
 
 	  //Read values mode
-	  if(espTxFlag == 0 && fifo_w_ptr_B !=PCM_BIG_BUF){
+	  if(espTxFlag == 0){
 		  if (RxFlag_B == 1) {
 
 			  pdm2pcm_status_half = PDM_Filter(&PDM_Rxbuf_B[0], &pcmMidBuf_B[0], &PDM1_filter_handler);
@@ -265,8 +265,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 96;
+  RCC_OscInitStruct.PLL.PLLM = 5;
+  RCC_OscInitStruct.PLL.PLLN = 125;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   RCC_OscInitStruct.PLL.PLLR = 2;
