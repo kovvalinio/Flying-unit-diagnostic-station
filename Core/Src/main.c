@@ -42,9 +42,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define PDM_BUF 384
+#define PDM_BUF 768
 #define PCM_MID_BUF 48
-#define PCM_BIG_BUF 4800
+#define PCM_BIG_BUF 2*48000
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -68,7 +68,7 @@
 
 		uint8_t espTxFlag=0;// Esp flag. This flag allows to switch modes between reading values and transimiting to esp.
 
-		  uint8_t tab[9]; //Array of compressed data.
+		  uint8_t tab[2*PCM_BIG_BUF]; //Array of compressed data.
 
 		  uint8_t V = 1; // Compression protocol version.
 
@@ -164,7 +164,7 @@ int main(void)
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_I2S_Receive_DMA(&hi2s1, (uint16_t*)PDM_Rxbuf_B, PDM_BUF);
+  HAL_I2S_Receive_DMA(&hi2s1, (uint8_t*)PDM_Rxbuf_B, PDM_BUF);
 
   MX_MEMS_Init();
   IKS02A1_MOTION_SENSOR_Axes_t acceleration;
@@ -210,20 +210,25 @@ int main(void)
 
 
 			  	  	  //This function reads values from accelerometer.
-		  	  	  	  Accelero_Get_Values(0, &acceleration);
+//		  	  	  	  Accelero_Get_Values(0, &acceleration);
 
 //		  	  	  	  databufforlentgh = sprintf(dataOut, "%d;%d;%d;%d\r",
 //		  	  	               	   	   	   	   	acceleration.x, acceleration.y, acceleration.z, pcm_big_buf_B[i]);
 
 		  	  	  	  //Function compressing data
-		  	  	  	  update_val(tab, V, (int16_t)acceleration.x, (int16_t)acceleration.y,
-		  	  	  			  (int16_t)acceleration.z, pcm_big_buf_B[i]);
+		  	  	  	  update_val(tab,  pcm_big_buf_B[i], 2*i);
 
-		  	  	  		  HAL_UART_Transmit_IT(&huart3, tab, 9);
-
-		  			  HAL_Delay(100);
+//		  	  	  		  HAL_UART_Transmit_IT(&huart3, tab, 9);
+//
+//		  			  HAL_Delay(100);
 
 		  }
+		  for(int i = 0 ; i < 2*PCM_BIG_BUF ;i=i+8){
+			  HAL_UART_Transmit_IT(&huart3, &tab[i], 8);
+			  HAL_Delay(1);
+		  }
+
+
 			espTxFlag = 0;
 
 	  }
