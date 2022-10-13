@@ -9,7 +9,7 @@
 #define INC_TEST_LIB_H_
 #include <stdio.h>
 #include <string.h>
-void update_val(uint8_t tab[9], uint8_t V, uint16_t X, uint16_t Y, uint16_t Z, uint16_t sound_probe);
+void update_val(char tab[2],  uint16_t sound_probe, int it);
 
 //	  tab[0] = 1;
 //	  tab[1] = X >> 8;

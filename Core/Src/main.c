@@ -21,8 +21,8 @@
 #include "crc.h"
 #include "dma.h"
 #include "i2c.h"
-#include "i2s.h"
 #include "pdm2pcm.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -44,7 +44,7 @@
 /* USER CODE BEGIN PD */
 #define PDM_BUF 384
 #define PCM_MID_BUF 48
-#define PCM_BIG_BUF 4800
+#define PCM_BIG_BUF 2*48000
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -68,7 +68,7 @@
 
 		uint8_t espTxFlag=0;// Esp flag. This flag allows to switch modes between reading values and transimiting to esp.
 
-		  uint8_t tab[9]; //Array of compressed data.
+		  char tab[2*PCM_BIG_BUF]; //Array of compressed data.
 
 		  uint8_t V = 1; // Compression protocol version.
 
@@ -97,13 +97,13 @@ void FifoWrite_B(uint16_t data) {
 
 //Callbacks allowing pipelining in the i2s interface.
 //Its used to ensure constant data flow.
-void HAL_I2S_RxHalfCpltCallback (I2S_HandleTypeDef *hi1s) {
+void HAL_SPI_RxHalfCpltCallback (SPI_HandleTypeDef *hi1s) {
 	  if(hi1s->Instance ==SPI1){
 	  RxFlag_B = 1;
 	  }
 }
 
-void HAL_I2S_RxCpltCallback (I2S_HandleTypeDef *hi1s) {
+void HAL_SPI_RxCpltCallback (SPI_HandleTypeDef *hi1s) {
 	  if(hi1s->Instance ==SPI1){
 	  RxFlag_B = 2;
 	  }
@@ -157,18 +157,18 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM3_Init();
   MX_DMA_Init();
-  MX_I2S1_Init();
   MX_USART3_UART_Init();
   MX_CRC_Init();
   MX_PDM2PCM_Init();
   MX_I2C2_Init();
+  MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_I2S_Receive_DMA(&hi2s1, (uint16_t*)PDM_Rxbuf_B, PDM_BUF);
+  HAL_SPI_Receive_DMA(&hspi1, (uint8_t*)PDM_Rxbuf_B, PDM_BUF);
 
   MX_MEMS_Init();
   IKS02A1_MOTION_SENSOR_Axes_t acceleration;
-  char dataOut[300];
+  char dataOut[5];
   uint16_t databufforlentgh;
 
   /* USER CODE END 2 */
@@ -181,7 +181,7 @@ int main(void)
 
 
 	  //Read values mode
-	  if(espTxFlag == 0 && fifo_w_ptr_B !=PCM_BIG_BUF){
+	  if(espTxFlag == 0 ){
 		  if (RxFlag_B == 1) {
 
 			  pdm2pcm_status_half = PDM_Filter(&PDM_Rxbuf_B[0], &pcmMidBuf_B[0], &PDM1_filter_handler);
@@ -194,7 +194,7 @@ int main(void)
 			}
 		  if (RxFlag_B == 2) {
 			//HAL_GPIO_WritePin(TX_OUTPUT_GPIO_Port, TX_OUTPUT_Pin, GPIO_PIN_SET);
-			  pdm2pcm_status_cplt = PDM_Filter(&PDM_Rxbuf_B[192], &pcmMidBuf_B[0], &PDM1_filter_handler);
+			  pdm2pcm_status_cplt = PDM_Filter(&PDM_Rxbuf_B[PDM_BUF/2], &pcmMidBuf_B[0], &PDM1_filter_handler);
 				 for (int i = 0; i < PCM_MID_BUF; i++) {
 					 FifoWrite_B(pcmMidBuf_B[i]);
 				 }
@@ -206,24 +206,27 @@ int main(void)
 
 	  //Transmit mode
 	  if(espTxFlag == 1){
-		  for(int i = 0 ; i < PCM_BIG_BUF ; i++){
+
+		  for(int i = 0 ; i < PCM_BIG_BUF ; i=i+1){
 
 
 			  	  	  //This function reads values from accelerometer.
-		  	  	  	  Accelero_Get_Values(0, &acceleration);
+//	  	  	  	  Accelero_Get_Values(0, &acceleration);
 
-//		  	  	  	  databufforlentgh = sprintf(dataOut, "%d;%d;%d;%d\r",
-//		  	  	               	   	   	   	   	acceleration.x, acceleration.y, acceleration.z, pcm_big_buf_B[i]);
+//		  	  	  	  databufforlentgh = sprintf(dataOut, "%d;\r", pcm_big_buf_B[i]);
 
-		  	  	  	  //Function compressing data
-		  	  	  	  update_val(tab, V, (int16_t)acceleration.x, (int16_t)acceleration.y,
-		  	  	  			  (int16_t)acceleration.z, pcm_big_buf_B[i]);
 
-		  	  	  		  HAL_UART_Transmit_IT(&huart3, tab, 9);
+			  	  	  update_val(&tab, pcm_big_buf_B[i], 2*(i));
 
-		  			  HAL_Delay(100);
+
 
 		  }
+		  for(int i = 0 ; i < 2*PCM_BIG_BUF ;i=i+8){
+			  HAL_UART_Transmit_IT(&huart3, &tab[i], 8);
+			  HAL_Delay(1);
+		  }
+
+
 			espTxFlag = 0;
 
 	  }
@@ -260,9 +263,9 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 96;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLM = 7;
+  RCC_OscInitStruct.PLL.PLLN = 344;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -282,7 +285,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {

@@ -25,18 +25,19 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2s.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_spi.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_spi_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Core/Inc/crc.h ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/i2c.h \
- ../Core/Inc/i2s.h ../PDM2PCM/App/pdm2pcm.h \
+ ../PDM2PCM/App/pdm2pcm.h \
  ../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h \
- ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- ../Core/Inc/mems_configuration.h \
+ ../Core/Inc/spi.h ../Core/Inc/tim.h ../Core/Inc/usart.h \
+ ../Core/Inc/gpio.h ../Core/Inc/mems_configuration.h \
  ../Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h \
  ../X-CUBE-MEMS1/Target/iks02a1_conf.h ../Core/Inc/stm32f7xx_nucleo_bus.h \
  ../Core/Inc/stm32f7xx_nucleo_conf.h ../Core/Inc/stm32f7xx_nucleo_errno.h \
@@ -103,11 +104,13 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h:
 
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2s.h:
-
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_spi.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_spi_ex.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:
 
@@ -125,11 +128,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Inc/i2c.h:
 
-../Core/Inc/i2s.h:
-
 ../PDM2PCM/App/pdm2pcm.h:
 
 ../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h:
+
+../Core/Inc/spi.h:
 
 ../Core/Inc/tim.h:
 

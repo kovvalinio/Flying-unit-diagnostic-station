@@ -9,9 +9,9 @@ C_SRCS += \
 ../Core/Src/dma.c \
 ../Core/Src/gpio.c \
 ../Core/Src/i2c.c \
-../Core/Src/i2s.c \
 ../Core/Src/main.c \
 ../Core/Src/mems_configuration.c \
+../Core/Src/spi.c \
 ../Core/Src/stm32f7xx_hal_msp.c \
 ../Core/Src/stm32f7xx_it.c \
 ../Core/Src/stm32f7xx_nucleo.c \
@@ -28,9 +28,9 @@ OBJS += \
 ./Core/Src/dma.o \
 ./Core/Src/gpio.o \
 ./Core/Src/i2c.o \
-./Core/Src/i2s.o \
 ./Core/Src/main.o \
 ./Core/Src/mems_configuration.o \
+./Core/Src/spi.o \
 ./Core/Src/stm32f7xx_hal_msp.o \
 ./Core/Src/stm32f7xx_it.o \
 ./Core/Src/stm32f7xx_nucleo.o \
@@ -47,9 +47,9 @@ C_DEPS += \
 ./Core/Src/dma.d \
 ./Core/Src/gpio.d \
 ./Core/Src/i2c.d \
-./Core/Src/i2s.d \
 ./Core/Src/main.d \
 ./Core/Src/mems_configuration.d \
+./Core/Src/spi.d \
 ./Core/Src/stm32f7xx_hal_msp.d \
 ./Core/Src/stm32f7xx_it.d \
 ./Core/Src/stm32f7xx_nucleo.d \
@@ -69,7 +69,7 @@ Core/Src/%.o: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/crc.d ./Core/Src/crc.o ./Core/Src/dma.d ./Core/Src/dma.o ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/i2c.d ./Core/Src/i2c.o ./Core/Src/i2s.d ./Core/Src/i2s.o ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/mems_configuration.d ./Core/Src/mems_configuration.o ./Core/Src/stm32f7xx_hal_msp.d ./Core/Src/stm32f7xx_hal_msp.o ./Core/Src/stm32f7xx_it.d ./Core/Src/stm32f7xx_it.o ./Core/Src/stm32f7xx_nucleo.d ./Core/Src/stm32f7xx_nucleo.o ./Core/Src/stm32f7xx_nucleo_bus.d ./Core/Src/stm32f7xx_nucleo_bus.o ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/system_stm32f7xx.d ./Core/Src/system_stm32f7xx.o ./Core/Src/test_lib.d ./Core/Src/test_lib.o ./Core/Src/tim.d ./Core/Src/tim.o ./Core/Src/usart.d ./Core/Src/usart.o
+	-$(RM) ./Core/Src/crc.d ./Core/Src/crc.o ./Core/Src/dma.d ./Core/Src/dma.o ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/i2c.d ./Core/Src/i2c.o ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/mems_configuration.d ./Core/Src/mems_configuration.o ./Core/Src/spi.d ./Core/Src/spi.o ./Core/Src/stm32f7xx_hal_msp.d ./Core/Src/stm32f7xx_hal_msp.o ./Core/Src/stm32f7xx_it.d ./Core/Src/stm32f7xx_it.o ./Core/Src/stm32f7xx_nucleo.d ./Core/Src/stm32f7xx_nucleo.o ./Core/Src/stm32f7xx_nucleo_bus.d ./Core/Src/stm32f7xx_nucleo_bus.o ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/system_stm32f7xx.d ./Core/Src/system_stm32f7xx.o ./Core/Src/test_lib.d ./Core/Src/test_lib.o ./Core/Src/tim.d ./Core/Src/tim.o ./Core/Src/usart.d ./Core/Src/usart.o
 
 .PHONY: clean-Core-2f-Src
 

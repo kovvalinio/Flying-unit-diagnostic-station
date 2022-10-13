@@ -1,7 +1,7 @@
 main.c:86:6:FifoWrite_B	16	static
-main.c:100:6:HAL_I2S_RxHalfCpltCallback	16	static
-main.c:106:6:HAL_I2S_RxCpltCallback	16	static
+main.c:100:6:HAL_SPI_RxHalfCpltCallback	16	static
+main.c:106:6:HAL_SPI_RxCpltCallback	16	static
 main.c:116:6:HAL_UART_TxCpltCallback	16	static
-main.c:134:5:main	352	static
-main.c:244:6:SystemClock_Config	88	static
-main.c:301:6:Error_Handler	4	static,ignoring_inline_asm
+main.c:134:5:main	48	static
+main.c:247:6:SystemClock_Config	88	static
+main.c:304:6:Error_Handler	4	static,ignoring_inline_asm
