@@ -414,14 +414,6 @@
     [
       "9538e4ed-27e6-4c37-b989-9859dc0d49e8",
       ""
-    ],
-    [
-      "0c2e50b3-7126-4a11-9a0f-18e3cf569ce8",
-      "JTAG_SWO"
-    ],
-    [
-      "65e2618f-f8d4-401c-9dca-2c53790822d2",
-      "ESP_connector"
     ]
   ],
   "text_variables": {}
