@@ -1,8 +1,0 @@
-mems_configuration.c:63:6:MX_MEMS_Init	8	static
-mems_configuration.c:85:6:MX_MEMS_Process	8	static
-mems_configuration.c:102:6:MX_IKS02A1_DataLogTerminal_Init	24	static
-mems_configuration.c:133:6:BSP_PB_Callback	16	static
-mems_configuration.c:142:6:MX_IKS02A1_DataLogTerminal_Process	16	static
-mems_configuration.c:181:13:floatToInt	32	static
-mems_configuration.c:203:13:Accelero_Sensor_Handler	56	static
-mems_configuration.c:228:6:Accelero_Get_Values	16	static
